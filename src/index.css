@@ -2,9 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap');
 
 :root{
   color-scheme: white;
   background-color: white;
-  color: white;
+  color: black;
+  font-family: "Lato", sans-serif;
+}
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
+.navbar{
+  padding: 0;
+}
+
+.btn{
+  border: none;
+  background-color: #587717;
+  margin-right: 2rem;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 0.75rem;
+  transition: background-color 0.2s ease;
+  border-right: 2px solid #fafbfa;
+  padding-right: 0.5rem;
 }
