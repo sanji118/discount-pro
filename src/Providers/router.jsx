@@ -11,6 +11,7 @@ import BrandPage from '../Pages/Brands/BrandPage';
 import CouponCard from '../Pages/Brands/CouponCard';
 import { PrivateRoute } from './PrivateRoute';
 import UpdateProfile from '../Pages/Profile/UpdateProfile';
+import ForgetPassword from '../components/Auth/ForgetPassword';
 
 const brandsLoader = async () => {
   try {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
   {
     path:'/login',
     element: <Login></Login>
+  },
+  {
+    path:'/forget-password',
+    element: <ForgetPassword></ForgetPassword>
   },
   {
     path: '/register',
