@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import auth from '../components/firebase.init';
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 
 
@@ -35,7 +35,7 @@ export const AuthProvider = ({children}) => {
 
   const updateUserProfile = profile =>{
     if(auth.currentUser){
-      return updateUserProfile(auth.currentUser, profile);
+      return updateProfile(auth.currentUser, profile);
     }
     return Promise.reject("No user is currently logged in.");
   }

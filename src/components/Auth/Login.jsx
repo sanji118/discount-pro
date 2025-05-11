@@ -1,37 +1,38 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
-  const navigate = useNavigate();
   const { signInUser, signInGoogle } = useContext(AuthContext);
-  const [emailInput, setEmailInput] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
-  const handleLogin = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    setEmailInput(email); 
+
     signInUser(email, password)
-      .then(userCredential => {
-        e.target.reset();
-        toast.success('Logged in successfully!');
-        navigate('/');
+      .then(() => {
+        toast.success('Login successful!');
+        navigate(from, { replace: true });
       })
-      .catch(error => {
-        toast.error('Invalid email or password');
-        console.error(error.message);
+      .catch((error) => {
+        toast.error(error.message);
       });
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleSignin = () => {
     signInGoogle()
       .then(() => {
-        toast.success('Logged in with Google!');
-        navigate('/');
+        toast.success('Signed in with Google!');
+        navigate(from, { replace: true });
       })
-      .catch(error => {
+      .catch((error) => {
         toast.error(error.message);
       });
   };
@@ -41,55 +42,52 @@ const Login = () => {
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold oswald">Login now!</h1>
-          <p className="py-6">
-            Access your account to manage saved brands, track exclusive offers, and stay updated on the latest verified coupons.
+          <p className="py-6 w-2/3 mx-auto">
+            Sign in to access your personalized dashboard, track favorites, and enjoy exclusive features!
           </p>
         </div>
+
         <div className="card w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
-            <form onSubmit={handleLogin} className="fieldset">
+            <form onSubmit={handleSubmit}>
               <label className="label text-black font-bold text-lg">Email</label>
               <input
                 type="email"
                 name="email"
-                className="input bg-[#d9efa1] placeholder:bg-[#d9efa1] placeholder:text-black"
+                className="input bg-[#d9efa1] placeholder:text-black"
                 placeholder="Email"
-                onChange={(e) => setEmailInput(e.target.value)}
-                value={emailInput}
+                required
               />
-              <label className="label text-black font-bold text-lg">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="input bg-[#d9efa1] placeholder:bg-[#d9efa1] placeholder:text-black"
-                placeholder="Password"
-              />
-              <div>
-                <Link
-                  to={`/forget-password?email=${encodeURIComponent(emailInput)}`}
-                  className="link link-hover text-sm text-blue-500"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-              <button className="btn my-4">Login</button>
 
-              <hr />
-              <p className="text-sm py-2">
-                Don't have an account?{' '}
-                <Link to="/register" className="text-red-500 font-bold ml-2">
-                  Register
-                </Link>
+              <label className="label text-black font-bold text-lg">Password</label>
+              <div className="relative">
+                <input
+                  type={passwordVisible ? 'text' : 'password'}
+                  name="password"
+                  className="input bg-[#d9efa1] w-full placeholder:text-black"
+                  placeholder="Password"
+                  required
+                />
+                <span
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  className="absolute right-4 top-3 cursor-pointer text-xl text-gray-700 z-10"
+                >
+                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+
+              <button type="submit" className="btn my-4 w-full">Login</button>
+
+              <p className="text-sm text-center">
+                New here?
+                <Link to="/register" className="text-green-500 font-bold ml-2">Register</Link>
               </p>
             </form>
 
-            <hr />
-            <button
-              onClick={handleGoogleLogin}
-              className="flex items-center gap-2 w-full justify-center border-2 border-blue-500 px-8 py-2 my-2 rounded-lg text-black font-bold"
-            >
-              <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-              Login with Google
+            <div className="border-t-2 border-gray-300 text-center py-3 font-semibold opacity-80">or</div>
+
+            <button onClick={handleGoogleSignin} className="btn shadow-none  text-black font-bold w-full" style={{backgroundColor:'white', border:'2px solid lightblue'}}>
+              <img src="/google.png" className='w-4 h-4 mr-2' alt="" />Log in with Google
             </button>
           </div>
         </div>
@@ -99,3 +97,4 @@ const Login = () => {
 };
 
 export default Login;
+

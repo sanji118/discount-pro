@@ -1,65 +1,63 @@
-import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../Providers/AuthProvider'
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
-  const {createUser , signInGoogle, updateUserProfile} = useContext(AuthContext);
+  const { createUser, signInGoogle, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
-  const validationPass = (password)=>{
-    if (password?.length < 6){
-      toast.warn("Password must be at least 6 characters.");
-    }
-    if(!/[A-Z]/.test(password)){
-      toast.warn("Password must contain at least one uppercase letter.");
-    }
-    if(!/[a-z]/.test(password)){
-      toast.warn('Password must be contain at least one lowecase letter.')
-    }
-    return '';
-  }
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleSubmit = e => {
+  const validatePassword = (password) => {
+    let isValid = true;
+    if (password.length < 6) {
+      toast.warn(' Password must be at least 6 characters.');
+      isValid = false;
+    }
+    if (!/[A-Z]/.test(password)) {
+      toast.warn('Password must include at least one uppercase letter.');
+      isValid = false;
+    }
+    if (!/[a-z]/.test(password)) {
+      toast.warn('Password must include at least one lowercase letter.');
+      isValid = false;
+    }
+    return isValid;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const photo = e.target.photo.files[0];
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const photoURL = URL.createObjectURL(e.target.photo.files[0]); 
 
+    const isValid = validatePassword(password);
+    if (!isValid) return;
 
-    const error = validationPass(password);
-    if (error) {
-      setPasswordError(error);
-      return;
-    }
-
-    setPasswordError('');
     createUser(email, password)
-      .then(()=>{
-        return updateUserProfile({displayName: name, photoURL});
+      .then(() => updateUserProfile({ displayName: name, photoURL }))
+      .then(() => {
+        toast.success('🎉 Registered successfully!');
+        navigate('/');
       })
-      .then(result => {
-        const user = result.user;
-        toast.success("Registered successfully!");
-        navigate('/')
-      })
-      .catch(error => {
+      .catch((error) => {
         toast.error(error.message);
       });
   };
 
-  const handleGoogleSignin = () =>{
+  const handleGoogleSignin = () => {
     signInGoogle()
-    .then(result =>{
-      toast.success("Signed in with Google!");
-    })
-    .catch (error =>{
-      toast.error(error.message);
-    })
-  }
+      .then(() => {
+        toast.success('Signed in with Google!');
+        navigate('/');
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className="hero min-h-screen">
@@ -73,61 +71,69 @@ const Register = () => {
 
         <div className="card w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
-            <form onSubmit={
-              handleSubmit} className="fieldset">
+            <form onSubmit={handleSubmit}>
               <label className="label text-black font-bold text-lg">Name</label>
               <input
                 type="text"
                 name="name"
-                className="input bg-[#d9efa1] placeholder:bg-[#d9efa1] placeholder:text-black"
+                className="input bg-[#d9efa1] placeholder:text-black"
                 placeholder="Full Name"
+                required
               />
 
               <label className="label text-black font-bold text-lg">Email</label>
               <input
                 type="email"
                 name="email"
-                className="input bg-[#d9efa1] placeholder:bg-[#d9efa1] placeholder:text-black"
+                className="input bg-[#d9efa1] placeholder:text-black"
                 placeholder="Email"
+                required
               />
 
-              <label className="label text-black font-bold text-lg">Photo URL</label>
+              <label className="label text-black font-bold text-lg">Photo</label>
               <input
                 type="file"
                 name="photo"
-                accept='image/*'
-                className="file-input bg-[#d9efa1] placeholder:bg-[#d9efa1] placeholder:text-black"
-                placeholder="Link to Photo"
+                accept="image/*"
+                className="file-input bg-[#d9efa1]"
+                required
               />
 
               <label className="label text-black font-bold text-lg">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="input bg-[#d9efa1] placeholder:bg-[#d9efa1] placeholder:text-black"
-                placeholder="Password"
-              />
+              <div className="relative">
+                <input
+                  type={passwordVisible ? 'text' : 'password'}
+                  name="password"
+                  className="input bg-[#d9efa1] w-full placeholder:text-black"
+                  placeholder="Password"
+                  required
+                />
+                <span
+                  onClick={() => setPasswordVisible(!passwordVisible)}
+                  className="absolute right-4 top-3 cursor-pointer z-10 text-xl text-gray-700"
+                >
+                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
 
-              <button className="btn my-4 ">Register</button>
+              <button type="submit" className="btn my-4 w-full">Register</button>
 
-              <hr />
-              <p className="text-sm py-2">
+              <p className="text-sm py-2 text-center">
                 Already have an account?
                 <Link to="/login" className="text-green-500 font-bold ml-2">Login</Link>
               </p>
             </form>
 
-            <hr />
+            <div className="border-t-2 border-gray-300 text-center py-3 font-semibold opacity-80">or</div>
 
-            <button onClick={handleGoogleSignin} class="flex items-center gap-2 w-full justify-center border-2 border-blue-500 px-8 py-2 my-2 rounded-lg text-black font-bold">
-              <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-              Sign In with Google
+            <button onClick={handleGoogleSignin} className="btn shadow-none  text-black font-bold w-full" style={{backgroundColor:'white', border:'2px solid lightblue'}}>
+              <img src="/google.png" className='w-4 h-4 mr-2' alt="" />Sign in with Google
             </button>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

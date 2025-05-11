@@ -15,7 +15,7 @@ export const Profile = () => {
             <p className="text-sm text-gray-500">Here is your profile information</p>
           </div>
           <Link to="/update-profile">
-            <button className="btn bg-blue-500 hover:bg-blue-600 text-white">Edit</button>
+            <button className="btn ">Edit</button>
           </Link>
         </div>
 
@@ -23,7 +23,7 @@ export const Profile = () => {
           <img
             src={user?.photoURL || "https://i.ibb.co/ZVFsg37/default-profile.png"}
             alt="profile"
-            className="w-32 h-32 rounded-full object-cover border-4 border-blue-300"
+            className="w-32 h-32 rounded-full object-cover border-4 border-[#9bf448]"
           />
           <div>
             <h3 className="text-xl font-semibold">{user?.displayName || "Not provided"}</h3>

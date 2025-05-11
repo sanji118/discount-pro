@@ -35,18 +35,18 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className="hero min-h-screen">
-      <div className="card w-full max-w-md shadow-2xl bg-base-100">
+    <div className="hero min-h-screen bg-gray-200">
+      <div className="card w-full bg-white max-w-md shadow-2xl ">
         <div className="card-body">
           <h2 className="text-3xl font-bold mb-4 text-center">Reset Your Password</h2>
-          <p className="text-sm text-center mb-4">
+          <p className="text-sm text-center opacity-80">
             Please enter your email address below. A password reset link will be sent to your email.
           </p>
           <form onSubmit={handleReset}>
-            <label className="label font-semibold">Email Address</label>
+            <label className="label text-black font-semibold py-2">Email Address</label>
             <input
               type="email"
-              className="input input-bordered w-full bg-[#d9efa1]"
+              className="input input-bordered w-full bg-[#d9efa1] placeholder:text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
