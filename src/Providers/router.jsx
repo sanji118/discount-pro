@@ -9,6 +9,8 @@ import Register from '../components/Auth/Register';
 import About from '../Pages/About';
 import BrandPage from '../Pages/Brands/BrandPage';
 import CouponCard from '../Pages/Brands/CouponCard';
+import { PrivateRoute } from './PrivateRoute';
+import UpdateProfile from '../Pages/Profile/UpdateProfile';
 
 const brandsLoader = async () => {
   try {
@@ -44,14 +46,18 @@ const router = createBrowserRouter([
   },
   {
     path: '/brand/:id',
-    element: <CouponCard></CouponCard>,
+    element: <PrivateRoute><CouponCard></CouponCard></PrivateRoute>,
     loader: brandsLoader
   },
   {
     path: '/my-profile',
     element: (
-      <Profile></Profile>
+      <PrivateRoute><Profile></Profile></PrivateRoute>
     )
+  },
+  {
+    path: '/update-profile',
+    element: <PrivateRoute><UpdateProfile></UpdateProfile></PrivateRoute>
   },
   {
     path:'/login',

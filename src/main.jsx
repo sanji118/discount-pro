@@ -5,13 +5,17 @@ import router from './Providers/router';
 import { RouterProvider } from 'react-router-dom';
 import { SearchProvider } from './components/SearchContext';
 import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from './Providers/AuthProvider';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <SearchProvider><RouterProvider router={router} />
-    <ToastContainer></ToastContainer>
-    </SearchProvider>
-    
+    <AuthProvider>
+      <SearchProvider>
+        <RouterProvider router={router} />
+      </SearchProvider>
+      <ToastContainer />
+    </AuthProvider>
   </StrictMode>
 );
+
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaHome, FaSearch, FaUser } from 'react-icons/fa'
 import { FaShop } from 'react-icons/fa6'
 import { HiInformationCircle } from 'react-icons/hi'
-import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
+import {  NavLink, useNavigate, useLocation, Link } from 'react-router-dom'
 import { IoMdClose } from 'react-icons/io'
 import { useSearch } from './SearchContext'
 
@@ -76,7 +76,7 @@ export const Navbar = () => {
           <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-[#d8f09e] rounded-box w-full">
             <li><Link to="/"><FaHome /> Home</Link></li>
             <li><Link to="/brand"><FaShop /> Brands</Link></li>
-            <li><Link to="/profile"><FaUser /> My Profile</Link></li>
+            <li><Link to="/my-profile"><FaUser /> My Profile</Link></li>
             <li><Link to="/about"><HiInformationCircle /> About</Link></li>
           </ul>
         </div>
