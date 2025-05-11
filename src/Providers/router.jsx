@@ -1,15 +1,14 @@
 
 import { createBrowserRouter } from 'react-router-dom';
 import { Home } from '../Pages/Home/Home';
-import { Brands } from '../Pages/Brands';
-import { BrandDetails } from '../Pages/BrandDetails';
+import { Brands } from '../Pages/Brands/Brands'
 import { Profile } from '../Pages/Profile/Profile';
 import NotFound from '../Pages/NotFound';
 import Login from '../components/Auth/Login';
 import Register from '../components/Auth/Register';
 import About from '../Pages/About';
-import TopBrands from '../Pages/Home/TopBrands';
-import BrandsOnSale from '../Pages/Home/BrandsOnSale';
+import BrandPage from '../Pages/Brands/BrandPage';
+import CouponCard from '../Pages/Brands/CouponCard';
 
 const brandsLoader = async () => {
   try {
@@ -39,15 +38,14 @@ const router = createBrowserRouter([
     element:<About></About>
   },
   {
-    path: '/brands',
-    element: <Brands />,
+    path: '/brand',
+    element: <BrandPage />,
     loader: brandsLoader
   },
   {
     path: '/brand/:id',
-    element: (
-      <BrandDetails></BrandDetails>
-    )
+    element: <CouponCard></CouponCard>,
+    loader: brandsLoader
   },
   {
     path: '/my-profile',

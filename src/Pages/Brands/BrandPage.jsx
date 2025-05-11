@@ -1,8 +1,16 @@
 import React from 'react'
+import { Navbar } from '../../components/Navbar'
+import { Brands } from './Brands'
+import { useLoaderData } from 'react-router-dom'
 
 const BrandPage = () => {
+    const brands = useLoaderData();
   return (
-    <div>BrandPage</div>
+    <div className='py-40'>
+        <h2 className='oswald text-4xl font-bold  my-4 text-center'>The Brand Hub – Where Savings Begin</h2>
+        <Navbar></Navbar>
+        <Brands brands={brands}></Brands>
+    </div>
   )
 }
 

@@ -21,7 +21,7 @@ const BannerSlider = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden my-24">
       <div className="flex gap-5 transition-all duration-500" style={{ transform: `translateX(-${index * 576}px)` }}>
         {images.map((img, i) => (
           <div key={i} className="flex-shrink-0">
