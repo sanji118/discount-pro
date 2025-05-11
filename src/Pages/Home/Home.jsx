@@ -1,20 +1,18 @@
 import React from 'react'
 import Header from '../../components/Header'
-import { Navbar } from '../../components/Navbar'
-
-import Welcome from './Welcome'
-import BannerSlider from './BannerSlider'
 import TopBrands from './TopBrands'
+import { Outlet, useLoaderData } from 'react-router-dom'
+import BrandsOnSale from './BrandsOnSale'
+import Description from './Description'
 
 export const Home = () => {
+  const brands = useLoaderData();
   return (
     <>
-    <Navbar></Navbar>
-    <Welcome></Welcome>
-    <BannerSlider></BannerSlider>
-    <TopBrands></TopBrands>
     <Header></Header>
-    
+    <TopBrands brands= {brands}></TopBrands>
+    <Description></Description>
+    <BrandsOnSale brands={brands}></BrandsOnSale>
     </>
     
   )
