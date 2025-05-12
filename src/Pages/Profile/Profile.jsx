@@ -13,7 +13,7 @@ export const Profile = () => {
         <img
           src={user?.photoURL || "https://i.ibb.co/ZVFsg37/default-profile.png"}
           alt="profile"
-          className="w-32 h-32 rounded-full absolute right-24 border-4  border-[#f6f8f5]"
+          className="w-32 h-32 rounded-full absolute left-24 border-4  border-[#f6f8f5]"
         />
       </div>
       <div className='flex items-center justify-center mt-20 ml-10'>

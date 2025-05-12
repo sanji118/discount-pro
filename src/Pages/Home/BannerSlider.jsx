@@ -15,13 +15,13 @@ const BannerSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex(prevIndex => (prevIndex + 1) % images.length);
-    }, 3000); // Change every 3 seconds
+    }, 3000); 
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative overflow-hidden mt-10 md:mt-40 mb-20">
+    <div className="relative overflow-hidden my-10 md:my-16">
       <div className="flex gap-5 transition-all duration-500" style={{ transform: `translateX(-${index * 576}px)` }}>
         {images.map((img, i) => (
           <div key={i} className="flex-shrink-0">

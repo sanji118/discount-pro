@@ -6,9 +6,9 @@ const Welcome = () => {
 
 
   return (
-    <div className='mt-32 oswald'>
+    <div className='mt-5 md:mt-10 oswald'>
       {user && (
-        <div className='text-center font-bold text-lg md:text-xl lg:text-2xl py-1 bg-[#cde47d] text-[#394907]'>
+        <div className='text-center font-bold text-lg md:text-xl lg:text-2xl bg-[#cde47d] text-[#394907] px-5'>
           {user.displayName || 'User'}! Welcome to Discount Pro — your one-stop shop for the best coupons and deals!unlock the best deals and start saving now!
         </div>
       )}

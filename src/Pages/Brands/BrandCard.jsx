@@ -10,7 +10,7 @@ const BrandCards = ({ brands }) => {
   })
 
   return (
-    <div className="md:pt-14 md:px-10 text-[#eac491]">
+    <div className="md:px-10 text-[#eac491]">
       {
         rows.map((row, rowIndex) => (
         <div

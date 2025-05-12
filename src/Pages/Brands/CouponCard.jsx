@@ -57,7 +57,7 @@ const CouponCard = () => {
             <p className="font-mono bg-gray-100 p-2 rounded">Code: <span className="font-bold">{coupon.coupon_code}</span></p>
 
             {/* Copy Code */}
-            <CopyToClipboard text={coupon.code} onCopy={handleCopy}>
+            <CopyToClipboard text={coupon.coupon_code} onCopy={handleCopy}>
               <button className="btn btn-outline btn-sm">Copy Code</button>
             </CopyToClipboard>
 

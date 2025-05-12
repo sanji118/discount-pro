@@ -1,27 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BrandCards from "./BrandCard"
+import { useSearch } from "../../components/SearchContext";
 
  
 
 export const Brands = ({brands}) => {
-
-  const uniquecategories = ['All', ... new Set(brands.map(brand=> brand.category))]
+  const {searchTerm} = useSearch();
   const [selected, SetSelected] = useState('All');
   const [filteredBrands, setFilteredBrands] = useState(brands);
+
+
+  const uniquecategories = ['All', ... new Set(brands.map(brand=> brand.category))]
   
+  
+  useEffect(()=>{
+    let updated = brands;
+
+    if(selected !== 'All'){
+      updated = updated.filter(brand => brand.category === selected);
+    }
+
+    if(searchTerm.trim()){
+      updated = updated.filter(brand=>
+        brand.brand_name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    }
+
+    setFilteredBrands(updated);
+}, [selected, searchTerm, brands])
+
+
+
   const handleCategoryClick = category =>{
-      SetSelected(category);
-      if(category === 'All'){
-          setFilteredBrands(brands);
-      }else{
-          const filtered = brands.filter(brand=>brand.category === category);
-          setFilteredBrands(filtered);
-          console.log(filtered)
-      }
+    SetSelected(category);
   }
 
   return (
-    <div className='mt-10 mx-5 md:mx-10 lg:mx-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10'>
+    <div className='my-7 mx-5 md:mx-10 lg:mx-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10'>
       <div>
         <h2 className='oswald text-2xl font-bold pb-2 border-l-4 border-[#ade953] pl-4 my-4'>All Categories </h2>
         <div className='flex flex-col font-semibold opacity-80 border border-[#bbf570] rounded-lg'>
