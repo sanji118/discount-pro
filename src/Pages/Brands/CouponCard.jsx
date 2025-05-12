@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { Navbar } from '../../components/Navbar';
 
 const CouponCard = () => {
   const { id } = useParams();
@@ -32,8 +33,9 @@ const CouponCard = () => {
 
   return (
     <div className="px-4 md:px-10 py-6">
+      <Navbar></Navbar>
       
-      <div className="text-center mb-8">
+      <div className="text-center mt-40 mb-8">
         <img src={brand.brand_logo} alt={brand.brand_name} className="mx-auto h-24" />
         <h1 className="text-3xl font-bold oswald mt-2">{brand.brand_name}</h1>
         <div className="flex justify-center mt-2">
@@ -59,9 +61,9 @@ const CouponCard = () => {
               <button className="btn btn-outline btn-sm">Copy Code</button>
             </CopyToClipboard>
 
-            <a href={brand.brand_link} target="_blank" rel="noopener noreferrer">
-              <button className="btn btn-sm mt-2">Use Now</button>
-            </a>
+            <Link to={brand.shopLink} target="_blank" rel="noopener noreferrer">
+              <button className="btn mt-2">Use Now</button>
+            </Link>
           </div>
         ))}
       </div>

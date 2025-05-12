@@ -38,7 +38,7 @@ export const Navbar = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-[#ade953] shadow-md">
-      {/* Search bar and Auth controls (desktop) */}
+      {/* (desktop) */}
       <div className='hidden md:flex justify-between items-center px-4 py-2'>
         <div className='flex items-center w-2/3'>
           <input
@@ -64,7 +64,7 @@ export const Navbar = () => {
               <div className='flex items-center space-x-2'>
                 <img src={user.photoURL} className="w-10 h-10 rounded-full border" alt="User" />
                 <span className='font-semibold'>{user.email}</span>
-                <button onClick={handleLogout} className='btn btn-error'>Logout</button>
+                <button onClick={handleLogout} className='btn'>Logout</button>
               </div>
             </>
           )}
@@ -73,12 +73,7 @@ export const Navbar = () => {
 
       <hr />
 
-      {/* Welcome message */}
-      {user && (
-        <div className='text-center font-bold text-xl py-1 bg-[#cde47d] text-[#394907]'>
-          Welcome, {user.displayName || 'User'}!
-        </div>
-      )}
+      
 
       {/* Navbar links */}
       <div className='navbar flex justify-between items-center px-4 py-2'>
@@ -125,6 +120,7 @@ export const Navbar = () => {
           )}
         </div>
       )}
+
     </div>
   );
 };

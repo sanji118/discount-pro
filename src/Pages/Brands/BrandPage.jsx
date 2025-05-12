@@ -7,7 +7,7 @@ const BrandPage = () => {
     const brands = useLoaderData();
   return (
     <div className='py-40'>
-        <h2 className='oswald text-4xl font-bold  my-4 text-center'>The Brand Hub – Where Savings Begin</h2>
+        <h2 className='oswald text-4xl font-bold  mt-14 text-center'>The Brand Hub – Where Savings Begin</h2>
         <Navbar></Navbar>
         <Brands brands={brands}></Brands>
     </div>
