@@ -23,7 +23,7 @@
 - **AOS (Animate On Scroll)**: Provides scroll-triggered animations.
 - **React Icons**: For including vector icons in the app.
 - **React Copy to Clipboard**: For copying coupon codes to the clipboard.
-- **API**: Data fetched from [JsonBin API](https://api.jsonbin.io/v3/b/682011008960c979a59713b8) for brand and coupon data.
+- **API**: Data fetched from [https://api.jsonbin.io/v3/b/682011008960c979a59713b8] for brand and coupon data.
 - **Freepik**: Resources used for images and icons.
 
 
@@ -50,8 +50,7 @@ Create a pull request
 
 
 
-### License: 
-This project is open-source and available under the MIT License.
+
 
 
 ### Acknowledgements
@@ -66,3 +65,9 @@ React: For enabling the component-based architecture.
 React Router: For managing routing and navigation in the app.
 
 Freepik: For the fantastic image resources used in the design.
+
+
+
+
+### License: 
+This project is open-source and available under the MIT License.
