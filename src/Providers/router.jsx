@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     loader: brandsLoader,
   },
   {
-    path:'/',
+    path:'/about',
     element:<About></About>
   },
   {
@@ -72,6 +72,7 @@ const router = createBrowserRouter([
     path: '/register',
     element: <Register></Register>
   },
+  
   {
     path: '*',
     element: <NotFound></NotFound>

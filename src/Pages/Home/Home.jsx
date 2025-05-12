@@ -4,6 +4,8 @@ import TopBrands from './TopBrands'
 import { Outlet, useLoaderData } from 'react-router-dom'
 import BrandsOnSale from './BrandsOnSale'
 import Description from './Description'
+import Footer from '../../components/Footer'
+import Testimonials from '../../components/Testimonials'
 
 export const Home = () => {
   const brands = useLoaderData();
@@ -13,6 +15,8 @@ export const Home = () => {
     <TopBrands brands= {brands}></TopBrands>
     <Description></Description>
     <BrandsOnSale brands={brands}></BrandsOnSale>
+    <Testimonials></Testimonials>
+    <Footer></Footer>
     </>
     
   )

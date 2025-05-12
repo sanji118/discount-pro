@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../Providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const AuthNavbar = () => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
