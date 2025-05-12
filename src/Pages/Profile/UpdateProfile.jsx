@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { updateProfile, updateEmail } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { FaArrowLeft } from 'react-icons/fa';
 
 
 const UpdateProfile = () => {
@@ -49,8 +50,16 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="min-h-screen py-10 bg-[url(/profileBg.avif)] flex items-center justify-center">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
+    <div className="min-h-screen">
+      <div className='bg-gradient-to-b from-[#587203] to-[#cde863] h-52 relative text-center font-bold text-[#233b03]'><Link to='/'><FaArrowLeft className='text-xl absolute top-2 left-2'></FaArrowLeft></Link>Edit Profile</div>
+      <div className="flex items-center">
+        <img
+          src={user?.photoURL || "https://i.ibb.co/ZVFsg37/default-profile.png"}
+          alt="profile"
+          className="w-32 h-32 rounded-full absolute right-24 border-4  border-[#f6f8f5]"
+        />
+      </div>
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg py-20">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-700">Update Profile</h2>
         <form onSubmit={handleUpdate} className="space-y-4">
           <div>

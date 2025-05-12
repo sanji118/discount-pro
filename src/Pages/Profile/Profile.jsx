@@ -1,35 +1,46 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../../Providers/AuthProvider'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import { FaArrowLeft, FaGreaterThan, FaLanguage, FaMoon } from 'react-icons/fa';
 
 export const Profile = () => {
 
   const {user} = useContext(AuthContext);
-  const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-[url(/profileBg.avif)] py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-700">Welcome, {user?.displayName || "User"} </h2>
-            <p className="text-sm text-gray-500">Here is your profile information</p>
-          </div>
-          <Link to="/update-profile">
-            <button className="btn ">Edit</button>
-          </Link>
+    <div className="min-h-screen">
+      <div className='bg-gradient-to-b from-[#587203] to-[#cde863] h-52 relative text-center font-bold text-[#233b03]'><Link to='/'><FaArrowLeft className='text-xl absolute top-2 left-2'></FaArrowLeft></Link>Profile</div>
+      <div className="flex items-center">
+        <img
+          src={user?.photoURL || "https://i.ibb.co/ZVFsg37/default-profile.png"}
+          alt="profile"
+          className="w-32 h-32 rounded-full absolute right-24 border-4  border-[#f6f8f5]"
+        />
+      </div>
+      <div className='flex items-center justify-center mt-20 ml-10'>
+      <Link to="/update-profile">
+        <button className="btn">Edit Profile</button>
+      </Link>
         </div>
-
-        <div className="flex gap-8 items-center">
-          <img
-            src={user?.photoURL || "https://i.ibb.co/ZVFsg37/default-profile.png"}
-            alt="profile"
-            className="w-32 h-32 rounded-full object-cover border-4 border-[#9bf448]"
-          />
-          <div>
-            <h3 className="text-xl font-semibold">{user?.displayName || "Not provided"}</h3>
-            <p className="text-gray-500">{user?.email}</p>
-          </div>
+      <div>
+        <h2 className="text-xl md:text-2xl font-bold text-gray-700 bg-[#d8f09d] oswald px-5 md:px-12 lg:px-14 my-4">Welcome, {user?.displayName || "User"} </h2>
+      </div>
+      <div>
+        <div>
+        <h2 className=' bg-[#d8f09d] px-5 md:px-12 lg:px-14 '>Personal Info</h2>
+        <div className='px-5 md:px-12 lg:px-14 my-3 opacity-80'><p >Your username:   {user?.displayName || "Not provided"}</p>
+        <p>Email:  {user?.email}</p></div>
+      </div>
+      <div>
+        <h2 className=' bg-[#d8f09d] px-5 md:px-12 lg:px-14 '>Preference</h2>
+        <div className='px-5 md:px-12 lg:px-14 my-3 opacity-80'><div className='opacity-80 flex justify-between items-center'>
+          <p className='flex items-center gap-2'><FaLanguage className='text-2xl'></FaLanguage> <p>Language</p> </p>
+          <p><FaGreaterThan></FaGreaterThan></p>
         </div>
+        <div className='opacity-80 flex justify-between items-center'>
+          <p className='flex items-center gap-2'><FaMoon className='text-lg' /> <p>Dark Mode</p> </p>
+          <p><FaGreaterThan></FaGreaterThan></p>
+        </div></div>
+      </div>
       </div>
     </div>
   );

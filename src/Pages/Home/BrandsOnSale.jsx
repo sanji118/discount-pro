@@ -10,10 +10,10 @@ const BrandsOnSale = () => {
   return (
     <>
     <h2 className='oswald text-5xl font-bold pb-6 border-l-8 border-[#ade953] pl-4 ml-5'>Brand On Sale</h2>
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-5 md:mx-9 lg:mx-12 gap-7 my-10'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-4 mx-5 md:mx-9 lg:mx-12 gap-7 my-10'>
       
     {saleBrands.map(brand => (
-        <div key={brand._id} className="card bg-base-100 image-full w-96 shadow-sm">
+        <div key={brand._id} className="card bg-base-100 image-full w-76 md:w-96 shadow-sm">
           <figure>
             <img
               src={brand.brand_logo}

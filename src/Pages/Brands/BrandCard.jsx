@@ -10,12 +10,12 @@ const BrandCards = ({ brands }) => {
   })
 
   return (
-    <div className=" px-4 md:pt-14 md:px-10 text-[#eac491]">
+    <div className="md:pt-14 md:px-10 text-[#eac491]">
       {
         rows.map((row, rowIndex) => (
         <div
           key={rowIndex}
-          className="carousel carousel-center rounded-box max-w-md gap-5 p-4"
+          className="carousel carousel-center rounded-box w-full md:max-w-md gap-5 p-4"
         >
           {brands.slice(
             Math.floor((brands.length / 3) * rowIndex), 
@@ -34,7 +34,7 @@ const BrandCards = ({ brands }) => {
                   <img
                     src={brand.brand_logo}
                     alt={brand.brand_name}
-                    className="rounded-xl w-10/12 h-20"
+                    className="rounded-lg w-10/12 h-20"
                   />
                 </figure>
                 <div className="card-body items-center text-center">
