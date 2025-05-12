@@ -26,16 +26,6 @@
 - **API**: Data fetched from [JsonBin API](https://api.jsonbin.io/v3/b/682011008960c979a59713b8) for brand and coupon data.
 - **Freepik**: Resources used for images and icons.
 
-## Installation
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/sanji118/discount-pro.git
-cd discount-pro
-
-
-
 
 
 
