@@ -24,7 +24,11 @@ const AuthNavbar = () => {
             <>
                 <div className='flex justify-center items-center gap-5'>
                 <img src={user.photoURL} className="w-10 h-10 rounded-full border" alt="User" />
-                <span className='font-semibold'>{user.email}</span>
+                <div className='flex flex-col opacity-80'>
+                    <span className='font-semibold'>{user.displayName}</span>
+                    <span className='font-semibold'>{user.email}</span>
+                </div>
+                
                 <button onClick={handleLogout} className='btn'>Logout</button>
                 </div>
             </>

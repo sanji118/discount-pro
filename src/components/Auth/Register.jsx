@@ -29,19 +29,22 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
     const password = e.target.password.value;
-    const photoURL = URL.createObjectURL(e.target.photo.files[0]); 
+    const photoUrl = e.target.photoURL.value.trim(); 
 
     const isValid = validatePassword(password);
     if (!isValid) return;
 
     createUser(email, password)
-      .then(() => updateUserProfile({ displayName: name, photoURL }))
+      .then(() => updateUserProfile({ 
+        displayName: name, 
+        photoURL : photoUrl }))
       .then(() => {
-        toast.success('🎉 Registered successfully!');
         navigate('/');
+        toast.success('Registered successfully!');
+        
       })
       .catch((error) => {
         toast.error(error.message);
@@ -51,8 +54,9 @@ const Register = () => {
   const handleGoogleSignin = () => {
     signInGoogle()
       .then(() => {
-        toast.success('Signed in with Google!');
         navigate('/');
+        toast.success('Signed in with Google!');
+        
       })
       .catch((error) => {
         toast.error(error.message);
@@ -90,12 +94,13 @@ const Register = () => {
                 required
               />
 
-              <label className="label text-black font-bold text-lg">Photo</label>
+              <label className="label text-black font-bold text-lg">Photo URl</label>
               <input
-                type="file"
-                name="photo"
+                type="text"
+                name="photoURL"
                 accept="image/*"
-                className="file-input bg-[#d9efa1]"
+                placeholder='https://example.com/image.extention'
+                className="input bg-[#d9efa1]"
                 required
               />
 

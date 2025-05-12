@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import ForgetPassword from './ForgetPassword';
 
 const Login = () => {
   const { signInUser, signInGoogle } = useContext(AuthContext);
@@ -74,7 +75,25 @@ const Login = () => {
                 >
                   {passwordVisible ? <FaEyeSlash /> : <FaEye />}
                 </span>
+
+                <div className="mt-2 text-right">
+                  <Link
+                    to={`/forget-password?email=${encodeURIComponent(document.querySelector('input[name="email"]')?.value || '')}`}
+                    className="link link-hover text-sm text-blue-600"
+                    onClick={(e) => {
+                      const email = document.querySelector('input[name="email"]')?.value;
+                      if (!email) {
+                        e.preventDefault();
+                        toast.error("Please enter your email first.");
+                      }
+                    }}
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+
               </div>
+
 
               <button type="submit" className="btn my-4 w-full">Login</button>
 
