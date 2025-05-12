@@ -30,7 +30,7 @@
 
 
 ***Live Demo***:
-Check out the live demo of Discount Pro here.
+Check out the live demo of [Discount Pro](https://discount-pro-e652a.web.app) here.
 
 
 ### Contributing:

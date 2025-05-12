@@ -3,7 +3,6 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import { updateProfile, updateEmail } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { FaArrowLeft } from 'react-icons/fa';
 
 
@@ -21,7 +20,7 @@ const UpdateProfile = () => {
     try {
       await updateProfile(user, {
         displayName: name,
-        photoUrl,
+        photoURL: photoUrl,
       });
 
       toast.success("Profile updated successfully!");
