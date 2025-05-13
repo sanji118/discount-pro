@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { getAuth, sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { sendPasswordResetEmail, signOut } from 'firebase/auth'
+import { toast } from 'react-toastify'
+import auth from '../firebase.init'
 
 const ForgetPassword = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const auth = getAuth();
 
   const [email, setEmail] = useState('');
 

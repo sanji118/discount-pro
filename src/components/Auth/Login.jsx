@@ -1,16 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import ForgetPassword from './ForgetPassword';
 
 const Login = () => {
   const { signInUser, signInGoogle } = useContext(AuthContext);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +17,7 @@ const Login = () => {
     signInUser(email, password)
       .then(() => {
         toast.success('Login successful!');
-        navigate(from, { replace: true });
+        navigate('/');
       })
       .catch((error) => {
         toast.error(error.message);
@@ -31,7 +28,7 @@ const Login = () => {
     signInGoogle()
       .then(() => {
         toast.success('Signed in with Google!');
-        navigate(from, { replace: true });
+        navigate('/');
       })
       .catch((error) => {
         toast.error(error.message);
@@ -79,7 +76,9 @@ const Login = () => {
                 <div className="mt-2 text-right">
                   <Link
                     to={`/forget-password?email=${encodeURIComponent(document.querySelector('input[name="email"]')?.value || '')}`}
+
                     className="link link-hover text-sm text-blue-600"
+                    
                     onClick={(e) => {
                       const email = document.querySelector('input[name="email"]')?.value;
                       if (!email) {
